@@ -33,28 +33,9 @@ import (
 	_ "github.com/mattn/go-sqlite3" //Pacote para usar o SQLite
 )
 
-// Estrutura que receberá o parse do JSON
-/*type USDBRL struct {
-	Dados Data
-}
-type Data struct {
-	Code        string `json:"code"`
-	Codein      string `json:"codein"`
-	Name        string `json:"name"`
-	High        string `json:"high"`
-	Low         string `json:"low"`
-	VarBid      string `json:"varBid"`
-	PctChange   string `json:"pctChange"`
-	Bid         string `json:"bid"`
-	Ask         string `json:"ask"`
-	Timestamp   string `json:"timestamp"`
-	Create_date string `json:"create_date"`
-}*/
-
 // Retorna o JSON com a cotação do dolar para o client
 type Cotacao struct {
 	Dolar string `json:"dolar"`
-	//Valor string `json:"valor"`
 }
 
 func main() {
@@ -144,10 +125,8 @@ func buscaDolarhandler(res http.ResponseWriter, req *http.Request) {
 	select {
 	case <-ctx.Done():
 		log.Println("Request Cancelada por timeout.")                                //Imprime no servidor na linha de comando.
-		http.Error(res, "Request cancelada por timeout.", http.StatusRequestTimeout) //Imprime no Browser.
 	default:
 		log.Println("Request processada com sucesso.") //Imprime no servidor na linha de comando.
-		http.ResponseWriter.Write(res, []byte("Request processada com sucesso."))
 	}
 }
 
